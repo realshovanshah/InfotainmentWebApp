@@ -12,6 +12,9 @@ def home(request):
 	return render(request=request,template_name="pages/home.html")
 
 def register(request):
+	return render(request=request,template_name="pages/register.html")
+
+def register(request):
 	# return HttpResponse("I am <strong> awesome </strong>")
 	if request.method == "POST":
 		form = OurForm(request.POST)
@@ -26,7 +29,7 @@ def register(request):
 
 def user_logout(request):
 	logout(request)
-	return redirect('main:home')
+	return redirect('main:register')
 
 def user_login(request):
 	if request.method == "POST":
