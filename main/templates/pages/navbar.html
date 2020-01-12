@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
+  <title>
     
   </title>
   
+<<<<<<< HEAD
 	{% load static %}
+=======
+  {% load static %}
+>>>>>>> c0a3a545d9661c41530256b7549c0f26d09e6dff
 
    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -16,6 +20,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Infotainment</a>
@@ -35,3 +40,25 @@
     </div>
 </nav></body>
 </html>
+=======
+<nav class="black">
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Infotainment</a>
+    <ul class="right hide-on-med-and-down">
+
+      {%if user.is_authenticated%}
+            <li><a href="/home">Home</a></li>    
+
+        <li><a href="/account">{{user.username}}</a></li>
+        <li><a href="/logout">Logout</a></li>   
+      {% else %}
+            <li><a href="/register">Home</a></li>    
+
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Login</a></li> 
+    {% endif %}
+    </ul>
+  </div>
+</nav></body>
+</html>
+>>>>>>> c0a3a545d9661c41530256b7549c0f26d09e6dff

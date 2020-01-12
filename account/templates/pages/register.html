@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 	{% include "pages/navbar.html"%}
 	
+=======
+{% include "pages/navbar.html" %}
+
+>>>>>>> c0a3a545d9661c41530256b7549c0f26d09e6dff
 	{%block content%}
 	<h1>Register Before Continuing To The Site</h1>
 
 <form method="POST">
 	{% csrf_token %}
 	{{form.as_p}}
-	<button class="btn">Submit</button>
+	<button class="btn", style="background-color:black;">Submit</button>
 </form>
 
 <a href="/login"><h5>Already have an account?</h5></a>
