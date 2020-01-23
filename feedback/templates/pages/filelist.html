@@ -1,0 +1,62 @@
+<!-- {% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<P>
+
+<a href="{% url 'post:upload' %}" class="btn btn-primary btn-sm">Upload</a>
+
+</P>
+{% if profiles %}	
+<table class="table">
+
+<thead>
+	
+</thead>
+
+<tbody>
+	{% for profile in profiles %}
+	<p>
+		<h6><b>{{profile.Title}}</h6></b>
+		
+		{{profile.Caption}}
+		<br><br>
+		<img src="{{profile.File.url}}" height="80%" width="50%">
+		<br>
+		<a href="{{ profile.File.url }}"><img src="..image/dwbutton.png" height="40" weight="40"></a>
+		<br>
+		<form method="POST" action="{% url 'post:delete' profile.pk %}">
+				{% csrf_token %}
+
+		<button type="submit" class="btn btn-primary">Delete</button>
+		</form><br>	
+		<form method="POST" action="{% url 'post:update' profile.pk %}">
+				{% csrf_token %}
+
+		<button type="submit" class="btn btn-primary">Update</button><br><br><br>
+		</form>	
+
+	</p>
+	{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="container">
+<div class="row">
+<div class="card-title">
+<div class="card-body"> No results ! </h1>
+
+</div>
+
+{% endif %}
+
+
+
+</script>
+{% endblock %} -->
