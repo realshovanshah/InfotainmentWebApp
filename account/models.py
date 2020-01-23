@@ -1,5 +1,13 @@
 from django.db import models
 from main.models import User
+
+# class UserAccount(models.Model):
+#     first_name = models.CharField(max_length=200,null=True)
+#     last_name = models.CharField(max_length=200)
+#     username = models.CharField(max_length=200)
+#     email = models.EmailField()
+#     password = models.CharField(max_length=200)
+
 # Create your models here.
 #GENRE, USER, MOVIES&TV, REVIEWS
 # class User(models.Model):
