@@ -5,8 +5,8 @@
 	<h1>Register Before Continuing To The Site</h1>
 
 <form method="POST">
-	{% csrf_token %}
-	{{form.as_p}}
+	{% csrf_token %} <!-- used as firewall to protect information from attackers -->
+	{{form.as_p}} 
 	<button class="btn">Submit</button>
 </form>
 

@@ -7,17 +7,21 @@ from django.contrib import messages
 from .forms import OurForm
 
 
-# Create your views here.
+#this function is for homepage.
 def home(request):
 	return render(request=request,template_name="pages/home.html")
 
+
+#this function is for registering into the app.
 def register(request):
 	return render(request=request,template_name="pages/register.html")
 
+
+#this function is for creating form and determining whether the form is valid or not.
 def register(request):
     if request.method == 'POST':
         form = OurForm(data=request.POST)
-        if form.is_valid():
+        if form.is_valid():  #redirects to homepage only if the form is valid.
             user=form.save()
             user.set_password(user.password)
             user.save()
@@ -26,47 +30,30 @@ def register(request):
             user=authenticate(username=username,password=password)
             login(request,user)
             return redirect('main:home')
-        # else:            
-
-        #     return render(request, "pages/register.html",{'error':"Given Username is Already Taken.Please Try Another."})            
-
-    # else:
     form = OurForm()
     return render(request, "pages/register.html", {"form":form})
 
-# def register(request):
-# 	# return HttpResponse("I am <strong> awesome </strong>")
-# 	if request.method == "POST":
-# 		form = OurForm(request.POST)
-# 		if form.is_valid():
-# 			user = form.save()
-# 			login(request,user)
-# 			return redirect('main:home')
 
-# 	form = OurForm()
-# 	return render(request=request, template_name="pages/register.html", 
-#  	 			context={"form": form}) 
-
+#this function logs user out when logged in
 def user_logout(request):
 	logout(request)
 	return redirect('main:register')
 
+
+#this function is for user to login if they have an account.
 def user_login(request):
 	if request.method == "POST":
 		username = request.POST['username']
 		password = request.POST['password']
 		user = authenticate(request,username=username, password=password)
 		form = AuthenticationForm(request, data=request.POST)
-		if form.is_valid():
+		if form.is_valid():  #logins user only if the details provided are valid.
 			username = form.cleaned_data.get("username")
 			password = form.cleaned_data.get("password")
 			if user is not None:
 				login(request, user)
-				messages.success(request, f'you have logged as {{ username }}') #.info,.error
+				messages.success(request, f'you have logged as {{ username }}') 
 				return redirect('main:home')
-	# 	else:
-	# 		return render(request, "pages/login.html",{'error':"Worng Username and Password"})
-	# else:
 	form = AuthenticationForm()
 	return render(request, "pages/login.html",context={"form": form})
 

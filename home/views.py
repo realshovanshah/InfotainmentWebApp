@@ -2,17 +2,18 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Show
 from django.db.models import Q
-# Create your views here.
 
 
+#function for homepage and listing the shows.
 def home(request):
-	# return render(request=request, template_name="pages/home.html", context={"shows": Show.objects.all})
     show = Show.objects.all()
     if request.GET:
         query = request.GET['q']
         show = get_data_queryset(str(query))
     return render(request, "pages/home.html", {"shows": show})
 
+
+#function for uploading.
 def upload(request):
     if request.method == 'POST':
         shows_name = request.POST['shows_name']
@@ -24,23 +25,17 @@ def upload(request):
     else:   
         return render(request,'pages/upload.html')
 
-def show_list(request):
-    show = Show.objects.all()
-    if request.GET:
-        query = request.GET['q']
-        show = get_data_queryset(str(query))
-    return render(request, "pages/home.html", {"shows": show})
 
-
+#funtion for searching specific movies or series.
 def get_data_queryset(query=None):
     queryset = []
     queries = query.split(" ")
-    for q in queries:
+    for q in queries:  #filters show_name, show_type and show_description that matvhes the keywords while searching.
         shows= Show.objects.filter(
             Q(shows_name__icontains=q) |
             Q(shows_type__icontains=q) |
             Q(shows_description__icontains=q)
         )
-    for show in shows:
+    for show in shows:  #provides us with shows after searching.
         queryset.append(show)
     return list(set(queryset))
