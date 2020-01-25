@@ -1,4 +1,4 @@
-Infotainment WebApp
+Infotainment WebApp:
 
 App to manage your movies and tv shows
 
@@ -10,5 +10,7 @@ Eric Joshi
 Grishan Bajracharya
 Rujan Shakya
 
-Installation
+
+Installation:
+
 $ pip install -r requirements.txt
