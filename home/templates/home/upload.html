@@ -1,0 +1,16 @@
+{% load crispy_forms_tags %}
+
+<head>
+   {% include "navbar.html" %}
+</head>
+<br>
+    {% block content %}
+    <div>
+    <form method = "POST" enctype="multipart/form-data" >
+
+    {% csrf_token %}
+    {{form|crispy}}
+
+    <button type="submit" class="btn btn-dark btn-sm">Upload</button>
+    </div>
+    {% endblock %}

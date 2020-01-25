@@ -1,3 +1,3 @@
 from django.db import models
-from main.models import User
+from django.contrib.auth.models import User
 

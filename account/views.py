@@ -9,12 +9,8 @@ from .forms import OurForm
 
 #this function is for homepage.
 def home(request):
-	return render(request=request,template_name="pages/home.html")
+	return render(request=request,template_name="home/home.html")
 
-
-#this function is for registering into the app.
-def register(request):
-	return render(request=request,template_name="pages/register.html")
 
 
 #this function is for creating form and determining whether the form is valid or not.
@@ -30,8 +26,11 @@ def register(request):
             user=authenticate(username=username,password=password)
             login(request,user)
             return redirect('main:home')
-    form = OurForm()
-    return render(request, "pages/register.html", {"form":form})
+        else:            
+            return render(request, "account/register.html",{'form':form})
+    else:
+        form = OurForm()
+        return render(request, "account/register.html", {"form":form})
 
 
 #this function logs user out when logged in
@@ -52,8 +51,11 @@ def user_login(request):
 			password = form.cleaned_data.get("password")
 			if user is not None:
 				login(request, user)
-				messages.success(request, f'you have logged as {{ username }}') 
 				return redirect('main:home')
-	form = AuthenticationForm()
-	return render(request, "pages/login.html",context={"form": form})
+		else:
+			messages.info(request, f'Invalid username or password')
+			return render(request, "account/login.html",context={"form": form})
+	else:
+		form = AuthenticationForm()
+		return render(request, "account/login.html",context={"form": form})
 
