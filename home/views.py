@@ -40,7 +40,7 @@ def get_data_queryset(query=None):
     queries = query.split(" ")
     for q in queries:
         shows= Show.objects.filter(
-            Q(shows_name__icontains=q)
+            Q(shows_Name__icontains=q)
         )
     for show in shows:
         queryset.append(show)
