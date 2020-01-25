@@ -1,12 +1,18 @@
 from django.db import models
 from main.models import User
+from model_utils import Choices
+
 # Create your models here
 
 class Show(models.Model):
 	shows_id = models.AutoField(primary_key = True)
 	shows_name = models.CharField(max_length = 50)
 	shows_description = models.TextField()
-	shows_type = models.CharField(max_length = 20) #choices = (('Movie'), ('Series'))
+	type_choices = Choices('TV Show','Movie')
+	shows_type = models.CharField(choices=type_choices, max_length=20)
+	genre_choices = Choices('Sci-Fi','Drama', 'Romance', 'Comedy', 'Fantasy', 'Thriller')
+	shows_genre = models.CharField(choices=genre_choices, max_length=20) #choices = (('Movie'), ('Series'))
+	shows_image = models.FileField(upload_to="shows/")
 	users= models.ManyToManyField(User) #on delete error
 	#feedback= models.ForeignKey(Feedback, on_delete=models.CASCADE)
 

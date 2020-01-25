@@ -10,11 +10,10 @@ class OurForm(forms.ModelForm):
 		model = User
 		fields = ['first_name', 'last_name','username','email', 'password']
 
-	#not compulsary
-	# def save(self, commit=True):
-	# 	user = super(OurForm, self).save(commit=False)
-	# 	user.email = self.cleaned_data['email']
-	# 	if commit:
-	# 		user.save()
+	def save(self, commit=True):
+		user = super(OurForm, self).save(commit=False)
+		user.password = self.cleaned_data['password']
+		if commit:
+			user.save()
 
-	# 	return user
+		return user

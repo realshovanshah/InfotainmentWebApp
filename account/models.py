@@ -1,5 +1,5 @@
 from django.db import models
-from main.models import User
+from django.contrib.auth.models import User
 
 # class UserAccount(models.Model):
 #     first_name = models.CharField(max_length=200,null=True)

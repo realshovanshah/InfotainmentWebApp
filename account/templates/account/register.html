@@ -1,14 +1,15 @@
 
-	{% include "pages/navbar.html"%}
+	{% include "navbar.html"%}
 	
 	{%block content%}
-	<h1>Register Before Continuing To The Site</h1>
-
+	<br>
+	<h3>Please Register Before Continuing To The Site</h3>
+	<br>
 <form method="POST">
 	{% csrf_token %}
 	{{form.as_p}}
 	<button class="btn">Submit</button>
 </form>
-
+<br>
 <a href="/login"><h5>Already have an account?</h5></a>
 	{%endblock%}

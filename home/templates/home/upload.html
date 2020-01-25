@@ -1,7 +1,19 @@
+<!-- {% load crispy_forms_tags %} -->
 
 <head>
-   {% include "pages/navbar.html" %}
+   {% include "navbar.html" %}
 </head>
+<br>
+
+    {% block content %}
+    <form method = "POST" enctype="multipart/form-data" >
+
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+
+    <!-- </form>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col">
@@ -31,7 +43,17 @@
             />
         </div>
         <br />
-  
+        <div class="col">
+            <input
+                type="file"
+                class="form-control"
+                placeholder="Shows Poster"
+                name="shows_poster"
+            />
+        </div>
+        <br />
+        
+
         <div class="col">
             <button
                 style="margin-top: 10px;"
@@ -41,4 +63,5 @@
                 Upload
             </button>
         </div>
-    </form>
+    </form> -->
+    {% endblock %}
