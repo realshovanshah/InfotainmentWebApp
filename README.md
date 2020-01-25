@@ -1,8 +1,10 @@
 Infotainment WebApp
+
 App to manage your movies and tv shows
 
 
 Group Members:
+
 Shovan Shah
 Eric Joshi
 Grishan Bajracharya
