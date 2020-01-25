@@ -2,11 +2,8 @@
 {% load crispy_forms_tags %}
 
 
-{% include "navbar.html" %}
-
-<br>
-
 {% block content %}
+<br>
 <form method="post" >
     {% csrf_token %}
     {{ show_form|crispy }}
