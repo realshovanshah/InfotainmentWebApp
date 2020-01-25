@@ -1,11 +1,12 @@
+{% load crispy_forms_tags %}
 
 	{% include "navbar.html" %}
 
 	{%block content%}
-	
+	<br>
 <form method="POST">
 	{% csrf_token %}
-	{{form.as_p}}
+	{{form|crispy}}
 	<button type="submit" class="btn">Submit</button>
 </form>
 	{%endblock%}

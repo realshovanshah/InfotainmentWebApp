@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
-<!-- {% load crispy_forms_tags %}
- -->
+{% load crispy_forms_tags %}
+
+
+{% include "navbar.html" %}
+
+<br>
+
 {% block content %}
 <form method="post" >
     {% csrf_token %}
-    {{ show_form.as_p }}
-    <button type="submit" class=" btn btn-primary">Update </button>
+    {{ show_form|crispy }}
+    <button type="submit" class="btn btn-dark">Update </button>
 </form>
 {% endblock %}
 
