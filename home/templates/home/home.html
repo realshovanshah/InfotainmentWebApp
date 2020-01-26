@@ -8,33 +8,34 @@
     <div class="row">
         {% for s in shows %}
         <div class="col-sm-3">
-            <div class="card bg-light" >
+            <div class="card bg-light">
                 <img src="{{ s.shows_Image.url }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h4 class="card-title">{{s.shows_Name}}</h4></a>
                     <h6 class="card-subtitle mb-2 text-muted">{{s.shows_Type}}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{s.shows_Genre}}</h6>
-
                     <p class="card-text">{{s.shows_Description}}</p>
-                <!-- </div>
-                <div> -->
+                    
+                    <div class="mb-3">
                     <a href="{{s.shows_Image.url}}" class="card-link">Download</a>
-                <!-- </div>
-                <div> -->
-                    <a href="/feedback" class="card-link">Give Feedback</a>
-                </div>
-                <div>
+                    
+                    <a href="/feedback" class="card-link ">Give Feedback</a>
+                    </div>
+
+                    <div>
                     <form method="POST" action="{% url 'home:delete_show' s.pk  %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-dark">Delete</button>
+                        <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
                     </form>
                 </div>
                 <div>
-                    <a href="{% url 'home:update' s.pk %}"><button class="btn btn-outline-dark">Update</button></a>
+                    <a href="{% url 'home:update' s.pk %}"><button class="btn btn-outline-dark btn-sm">Update</button></a>
                 </div>
+                </div>
+                
             </div>
         </div>
-                {% endfor %}
-      </div>
+        {% endfor %}
+    </div>
 </body>
 {% endblock %}
