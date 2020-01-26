@@ -4,13 +4,17 @@
 	
 	{%block content%}
 	<br>
-	<div class=""><h3>Please Register Before Continuing To The Site</h3></div>
-	<br>
+	<div class="alert alert-danger" role="alert">Please Register Before Continuing To The Site!</div>
+	
 <form method="POST">
 	{% csrf_token %}
 	{{form|crispy}}
 	<button class="btn btn-outline-dark mb-4">Submit</button>
 </form>
-<br>
-<a href="/login"><h5>Already have an account?</h5></a>
-	{%endblock%}
+<small class="text-muted">
+            Already have an account? <a href="/register" class=".text-secondary">Login</a>
+        </small>
+       {%endblock%}
+
+
+
