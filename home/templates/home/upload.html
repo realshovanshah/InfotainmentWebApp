@@ -5,7 +5,8 @@
 </head>
 <br>
     {% block content %}
-    <div>
+    <div class="container">
+	<div>
     <form method = "POST" enctype="multipart/form-data" >
 
     {% csrf_token %}
@@ -13,4 +14,5 @@
 
     <button type="submit" class="btn btn-outline-secondary btn-sm">Upload</button>
     </div>
+</div>
     {% endblock %}

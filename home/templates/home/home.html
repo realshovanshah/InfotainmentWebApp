@@ -5,6 +5,7 @@
 
 <body>
     <br>
+    <div class="container-fluid">
     <div class="row">
         {% for s in shows %}
         <div class="col-sm-3">
@@ -24,7 +25,7 @@
                     
                     <div class="row">
                     <div class="col">
-                    <form method="POST" action="{% url 'home:delete_show' s.pk  %}">
+                    <form method="POST" action="{% url 'home:delete_show' s.pk  %}" class="mb-1">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
                     </form>
@@ -33,11 +34,16 @@
                     <a href="{% url 'home:update' s.pk %}"><button class="btn btn-outline-dark btn-sm">Update</button></a>
                 </div>
                 </div>
+                <form method="POST" action="{% url 'home:add_favorite' s.pk  %}" class="mb-1">
+                        {% csrf_token %}
+                <button type="submit" class="btn btn btn-link pl-0">Favorite</button>
                 </div>
+                </form>
                 
             </div>
         </div>
         {% endfor %}
     </div>
+</div>
 </body>
 {% endblock %}

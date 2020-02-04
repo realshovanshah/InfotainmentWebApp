@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-def home(request):
-    return render(request=request,template_name="home/home.html")
+def details(request):
+    return render(request=request,template_name="feedback/details.html")
 
 def comment(request):
     current_user=request.user
@@ -31,4 +31,4 @@ def comment(request):
 
     
     form = CommentForm()
-    return render(request, 'pages/feedback.html', {'form':form})
+    return render(request, 'feedback/feedback.html', {'form':form})

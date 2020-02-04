@@ -4,6 +4,8 @@
 
 	{%block content%}
 	<br>
+	    <div class="container">
+
 <form method="POST">
 
 	{% csrf_token %}
@@ -13,4 +15,5 @@
         <small class="text-muted">
             Need An Account? <a href="/register" class=" .text-secondary">Register</a>
         </small>
+    </div>
 	{%endblock%}

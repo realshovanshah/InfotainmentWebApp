@@ -1,16 +1,13 @@
-Infotainment WebApp:
-
+# Infotainment WebApp:
 App to manage your movies and tv shows
 
+## Group Members:
+	Shovan Shah
+	Eric Joshi
+	Grishan Bajracharya
+	Rujan Shakya
 
-Group Members:
-
-Shovan Shah
-Eric Joshi
-Grishan Bajracharya
-Rujan Shakya
-
-
-Installation:
-
+### Installation:
+```sh
 $ pip install -r requirements.txt
+```

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Show
+from .models import Show, Favorite
 from .forms import UploadShows
 from django.db.models import Q
 from .forms import UploadShows
@@ -29,12 +29,12 @@ def upload(request):
     return render (request,'home/upload.html',{'form':form})
 
 
-def show_list(request):
-    show = Show.objects.all()
-    if request.GET:
-        query = request.GET['q']
-        show = get_data_queryset(str(query))
-    return render(request, "home/home.html", {"shows": show})
+# def show_list(request):
+#     show = Show.objects.all()
+#     if request.GET:
+#         query = request.GET['q']
+#         show = get_data_queryset(str(query))
+#     return render(request, "home/home.html", {"shows": show})
 
 
 #funtion for searching specific movies or series.
@@ -49,10 +49,17 @@ def get_data_queryset(query=None):
         queryset.append(show)
     return list(set(queryset))
 
+
 def delete_show(request, pk):
     show = Show.objects.get(pk=pk)
     show.delete()
     return redirect('main:home')
+
+# def delete_show_fav(request, pk):
+#     fav = Favorite.objects.get(pk=pk)
+#     fav.delete()
+#     return redirect('main:home')
+
 
 def update(request, show_id):
     show_obj = Show.objects.get(pk=show_id)
@@ -69,3 +76,32 @@ def update(request, show_id):
     }
     #if admin
     return render(request, 'home/update.html', context)
+
+
+# def favorites(request):
+#     context = dict()
+
+#     # grab all of the favorite objects from our database
+#     context['favorites'] = Favorite.objects.all()
+
+#     return render(request, 'home/favorites.html', context=context)
+
+def add_favorite(request, show):
+    # try: 
+        if request.method == 'POST':
+            new_fav = Favorite.objects.create(
+                body=Show.objects.get(shows_id=show)
+            )
+            new_fav.save()
+            return redirect('main:home')
+        else:
+            return JsonResponse({'data': False})
+    # except:
+    #     return JsonResponse({'data': False})
+
+def favorites(request):
+    new_fav = Favorite.objects.all()
+    if request.GET:
+        query = request.GET['q']
+        new_fav = get_data_queryset(str(query))
+    return render(request, "home/favorites.html", {'new_fav': new_fav})

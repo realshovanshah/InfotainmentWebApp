@@ -7,5 +7,7 @@ from . import views
 # app_name = "main"
 
 urlpatterns = [
-    path('feedback/', views.comment, name='feedback')
+    path('feedback/', views.comment, name='feedback'),
+    path('details/', views.details, name='details')
+
 ]

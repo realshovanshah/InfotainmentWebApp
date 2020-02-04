@@ -4,8 +4,9 @@
 	
 	{%block content%}
 	<br>
+	    <div class="container">
 	<div class="alert alert-danger" role="alert">Please Register Before Continuing To The Site!</div>
-	
+
 <form method="POST">
 	{% csrf_token %}
 	{{form|crispy}}
@@ -14,6 +15,7 @@
 <small class="text-muted">
             Already have an account? <a href="/register" class=".text-secondary">Login</a>
         </small>
+    </div>
        {%endblock%}
 
 
