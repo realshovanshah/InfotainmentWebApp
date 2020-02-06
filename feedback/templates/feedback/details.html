@@ -3,6 +3,17 @@
 </head>
 
 {% block content %}
-<!--Comments-->
+<body>
+	<div class="card">
+  <h5 class="card-header">Review</h5>
+  {%for f in feedback%}
+  <div class="card-body">
+    <h5 class="card-title">{{f.feedback_owner_id}}</h5>
+    <p class="card-text">{{f.feedback}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  {%endfor%}
+</div>
+</body>
 
 {% endblock %}

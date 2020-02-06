@@ -92,16 +92,28 @@ def add_favorite(request, show):
             new_fav = Favorite.objects.create(
                 body=Show.objects.get(shows_id=show)
             )
-            new_fav.save()
+            # new_fav.is_favorite=True
+            # # new_fav.is_favorite = not new_fav.is_favorite
+            # new_fav.save()
+            if new_fav.is_favorite:
+                new_fav.is_favorite = False
+                new_fav.save()
+            else:
+                new_fav.is_favorite = True
+                new_fav.save()
+            
             return redirect('main:home')
         else:
+            # new_fav.save()
             return JsonResponse({'data': False})
     # except:
     #     return JsonResponse({'data': False})
 
 def favorites(request):
-    new_fav = Favorite.objects.all()
+    context = dict()
+    context['new_fav'] = Favorite.objects.all()
     if request.GET:
         query = request.GET['q']
         new_fav = get_data_queryset(str(query))
-    return render(request, "home/favorites.html", {'new_fav': new_fav})
+    return render(request, "home/favorites.html", context=context)
+                                                  #{'new_fav': new_fav}

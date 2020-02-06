@@ -1,10 +1,10 @@
 from django import forms
 
-from .models import Comment
+from .models import Feedback
 
 
 
-class CommentForm(forms.ModelForm):
+class FeedbackForm(forms.ModelForm):
 	class Meta:
-		model = Comment
-		fields =['comment']
+		model = Feedback
+		fields =['feedback']

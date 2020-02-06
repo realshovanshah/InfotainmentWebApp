@@ -15,7 +15,6 @@ class Show(models.Model):
 	genre_choices = Choices('Sci-Fi','Drama', 'Romance', 'Comedy', 'Fantasy', 'Thriller')
 	shows_Genre = models.CharField(choices=genre_choices, max_length=20) #choices = (('Movie'), ('Series'))
 	shows_Image = models.FileField(upload_to="shows/")
-	# users= models.ManyToManyField(User) #on delete error
 	#feedback= models.ForeignKey(Feedback, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.shows_Name
@@ -23,10 +22,12 @@ class Show(models.Model):
 
 class Favorite(models.Model):
 	# fav_id = models.AutoField(primary_key = True)
-	body = models.ForeignKey(Show, on_delete=models.CASCADE, null=True)
+	# favourite_owner = models.ForeignKey(User, blank=True, on_delete=models.CASCADE, null=True)
+	body = models.ForeignKey(Show, on_delete=models.CASCADE, null=True) #protect
+	is_favorite=models.BooleanField(default=True)
 	# body = models.TextField()
-    # def __str__(self):
-    #     return f'Favorite Quote #{self.id}'
+	def __str__(self):
+		return self.id
 
 
 #genre for all the movies and series

@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from home.models import Show
+
 # Create your models here.
-class Comment(models.Model):
+class Feedback(models.Model):
     # image = models.ForeignKey(Post,blank=True, on_delete=models.CASCADE )
-    comment_owner = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
-    comment = models.TextField()
+    feedback_owner = models.ForeignKey(User, blank=True, on_delete=models.CASCADE, null=True)
+    feedback_show = models.ForeignKey(Show, on_delete=models.CASCADE, null=True)
+    feedback = models.TextField()
 
     def save_comment(self):
         self.save()
@@ -14,4 +17,4 @@ class Comment(models.Model):
 
    
     def __str__(self):
-        return str(self.comment)
+        return str(self.feedback)
