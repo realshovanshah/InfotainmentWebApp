@@ -29,7 +29,12 @@ class Favorite(models.Model):
 	def __str__(self):
 		return self.id
 
+class Recommendation(models.Model):
+	Name = models.CharField(max_length=40)
+	Email = models.CharField(max_length=40)
 
+	def __str__(self):
+		return self.r_Name	
 #genre for all the movies and series
 # class Genre(models.Model):
 # 	genre_id = models.AutoField(primary_key=True)

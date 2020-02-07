@@ -1,23 +1,20 @@
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-	{% include "navbar.html"%}
-	
-	{%block content%}
-	<br>
-	<br>
-	    <div class="container ">
-	<div class="alert alert-danger" role="alert">Please Register Before Continuing To The Site!</div>
+{%block title%}<title>Register</title>{%endblock%}
 
-<form method="POST">
-	{% csrf_token %}
-	{{form|crispy}}
-	<button class="btn btn-outline-dark mb-4">Submit</button>
-</form>
-<small class="text-muted">
-            Already have an account? <a href="/register" class=".text-secondary">Login</a>
-        </small>
-    </div>
-       {%endblock%}
-
-
-
+{%block content%}
+<br>
+<br>
+<div class="container ">
+    <div class="alert alert-danger" role="alert">Please Register Before Continuing To The Site!</div>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-outline-dark mb-4">Submit</button>
+    </form>
+    <small class="text-muted">
+        Already have an account? <a href="/register" class=".text-secondary">Login</a>
+    </small>
+</div>
+{%endblock%}

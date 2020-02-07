@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Show, Favorite
+from .models import Show, Favorite, Recommendation
 from .forms import UploadShows
 from django.db.models import Q
-from .forms import UploadShows
+from .forms import UploadShows, RecommendationForm
 from django.contrib import messages
 
 # Create your views here.
-
+def recommendation(request):
+        return render(request=request,template_name="home/recommendation.html")
 
 #function for homepage and listing the shows.
 def home(request):
@@ -29,6 +30,14 @@ def upload(request):
     return render (request,'home/upload.html',{'form':form})
 
 
+def recommendationDetail(request):
+    if request.method == 'POST':
+       rform = RecommendationForm(request.POST)
+       if rform.is_valid():
+           rform.save()
+           return redirect('main:home')
+    rform = RecommendationForm()
+    return render (request,'home/recommendation.html',{'rform':rform})
 # def show_list(request):
 #     show = Show.objects.all()
 #     if request.GET:
@@ -111,6 +120,7 @@ def add_favorite(request, show):
 
 def favorites(request):
     context = dict()
+    
     context['new_fav'] = Favorite.objects.all()
     if request.GET:
         query = request.GET['q']

@@ -13,6 +13,7 @@ urlpatterns = [
     # path("favorites/<int:pk>/", views.delete_show_fav, name="delete_show_fav"), #slug to delete specified no.
     path("home/update/<int:show_id>/", views.update, name="update"), #slug to delete specified no.
     path('favorites', views.favorites),
+    path('recommendation/', views.recommendationDetail, name="recommendation"),
     path('add_favorite/<str:show>', views.add_favorite, name="add_favorite"),
     # re_path('', index),
 ]	

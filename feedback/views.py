@@ -15,9 +15,11 @@ def details(request):
 
 def show_feedback(request, pk):
     # detail = User.objects.get(pk = pk)
+    # context = dict()
+    
     feedback = Feedback.objects.all()
     # if request.user.is_authenticated:
-    return render(request, "feedback.html", context={'feedback':feedback})
+    return render(request, "details.html", context={'feedback':feedback})
     # else:
         # return redirect('main:home')
 
@@ -30,7 +32,7 @@ def feedback(request,shows_id):
     #     feedback_owner = User.objects.get(pk=request.user.id), 
     #     feedback_show = Show.objects.get(shows_id=show)
     #     )  
-    feedback = Feedback.objects.get(pk=request.user.id, feedback_owner=shows_id)
+    feedback = Feedback.objects.get(pk=request.user.id, feedback_show=show.shows_id)
     print(feedback)
     if request.method == 'POST':
         form = FeedbackForm(request.POST)

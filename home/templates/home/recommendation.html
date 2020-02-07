@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{%block title%}<title>Recommendation</title>{%endblock%}
+
+<br>
+    {% block content %}
+    <br>
+    <div class="container">
+    <div class="alert alert-danger text-center" role="alert">We'll send you handpicked shows, based on your activity!</div>
+    </div>
+    <div class="container">
+	<div>
+    <form method = "POST" enctype="multipart/form-data" >
+
+    {% csrf_token %}
+    {{rform|crispy}}
+
+    <button type="submit" class="btn btn-outline-dark mb-4">Send</button>
+    </div>
+</div>
+    {% endblock %}
