@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import Show, Favorite, Recommendation
 from .forms import UploadShows
@@ -18,14 +18,14 @@ def home(request):
         show = get_data_queryset(str(query))
     return render(request, 'home/home.html', {'shows': show})
 
-
+ 
 #function for uploading.
 def upload(request):
     if request.method == 'POST':
        form = UploadShows(request.POST,request.FILES)
        if form.is_valid():
            form.save()
-           return redirect('main:home')
+           return redirect('home:home')
     form = UploadShows()
     return render (request,'home/upload.html',{'form':form})
 
@@ -35,7 +35,7 @@ def recommendationDetail(request):
        rform = RecommendationForm(request.POST)
        if rform.is_valid():
            rform.save()
-           return redirect('main:home')
+           return redirect('home:home')
     rform = RecommendationForm()
     return render (request,'home/recommendation.html',{'rform':rform})
 # def show_list(request):
@@ -62,12 +62,13 @@ def get_data_queryset(query=None):
 def delete_show(request, pk):
     show = Show.objects.get(pk=pk)
     show.delete()
-    return redirect('main:home')
+    return redirect('home:home')
 
-# def delete_show_fav(request, pk):
-#     fav = Favorite.objects.get(pk=pk)
-#     fav.delete()
-#     return redirect('main:home')
+
+def delete_fav(request, pk=None):
+    fav = Favorite.objects.get(pk=pk)
+    fav.delete()
+    return redirect('home:favorites')
 
 
 def update(request, show_id):
@@ -79,7 +80,7 @@ def update(request, show_id):
     if show_form.is_valid():
         show_form.save()
         messages.success(request, f'Post updated.')
-        return redirect('main:home')
+        return redirect('home:home')
     context = {
         'show_form': show_form,
     }
@@ -87,36 +88,30 @@ def update(request, show_id):
     return render(request, 'home/update.html', context)
 
 
-# def favorites(request):
-#     context = dict()
-
-#     # grab all of the favorite objects from our database
-#     context['favorites'] = Favorite.objects.all()
-
-#     return render(request, 'home/favorites.html', context=context)
-
 def add_favorite(request, show):
     # try: 
         if request.method == 'POST':
             new_fav = Favorite.objects.create(
-                body=Show.objects.get(shows_id=show)
+                show=Show.objects.get(shows_id=show)
             )
             # new_fav.is_favorite=True
             # # new_fav.is_favorite = not new_fav.is_favorite
             # new_fav.save()
-            if new_fav.is_favorite:
-                new_fav.is_favorite = False
+            if new_fav.show.is_favorite:
+                new_fav.show.is_favorite = False
                 new_fav.save()
             else:
-                new_fav.is_favorite = True
+                new_fav.show.is_favorite = True
                 new_fav.save()
             
-            return redirect('main:home')
+            return redirect('home:favorites')
         else:
             # new_fav.save()
             return JsonResponse({'data': False})
     # except:
     #     return JsonResponse({'data': False})
+
+
 
 def favorites(request):
     context = dict()
@@ -126,4 +121,4 @@ def favorites(request):
         query = request.GET['q']
         new_fav = get_data_queryset(str(query))
     return render(request, "home/favorites.html", context=context)
-                                                  #{'new_fav': new_fav}
+                                                  # {'new_fav': new_fav}

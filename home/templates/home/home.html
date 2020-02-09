@@ -30,12 +30,9 @@
                             <a href="{% url 'home:update' s.pk %}"><button class="btn btn-outline-dark btn-sm">Update</button></a>
                         </div>
                     </div>
-                    {% if s in new_fav %}
-                    <form method="POST" action="{% url 'home:add_favorite' s.pk  %}" class="mb-1">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn btn-link pl-0">Added</button>
+                    {% if s.is_favorite %}
+                       <button type="submit" class="btn btn btn-link pl-0">Added</button>
                 </div>
-                </form>
                 {% else %}
                 <form method="POST" action="{% url 'home:add_favorite' s.pk  %}" class="mb-1">
                     {% csrf_token %}
