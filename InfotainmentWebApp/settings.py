@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'home',
     'account',
     'main',
+    'restApi',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
