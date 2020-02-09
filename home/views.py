@@ -88,37 +88,25 @@ def update(request, show_id):
     return render(request, 'home/update.html', context)
 
 
-def add_favorite(request, show):
-    # try: 
-        if request.method == 'POST':
-            new_fav = Favorite.objects.create(
-                show=Show.objects.get(shows_id=show)
-            )
-            # new_fav.is_favorite=True
-            # # new_fav.is_favorite = not new_fav.is_favorite
-            # new_fav.save()
-            if new_fav.show.is_favorite:
-                new_fav.show.is_favorite = False
-                new_fav.save()
-            else:
-                new_fav.show.is_favorite = True
-                new_fav.save()
-            
-            return redirect('home:favorites')
-        else:
-            # new_fav.save()
-            return JsonResponse({'data': False})
-    # except:
-    #     return JsonResponse({'data': False})
-
-
+def add_favorite(request,pk=None):
+    if request.method == 'POST':
+        show = get_object_or_404(Show, pk=pk)
+        show.is_favorite= True
+        show.save()
+        # f=Favorite(user_id=request.user.id)
+        Favorite.objects.create(shows_id=show.shows_id)
+        # f.shows_id=pk
+        # f.fav_status=True
+        # f.save()
+        messages.success(request, 'Successfully Favorited!!!.')
+        return redirect('home:home')
+        # else:
+        #     show.is_favorite = False
+        #     show.save()
+    return render(request, 'home/favorites.html')
+        
 
 def favorites(request):
-    context = dict()
-    
-    context['new_fav'] = Favorite.objects.all()
-    if request.GET:
-        query = request.GET['q']
-        new_fav = get_data_queryset(str(query))
-    return render(request, "home/favorites.html", context=context)
-                                                  # {'new_fav': new_fav}
+    # new_fav= Favorite.objects.filter(user_id=request.user.id)
+    new_fav= Favorite.objects.all()
+    return render(request, 'home/favorites.html', {"new_fav":new_fav})
