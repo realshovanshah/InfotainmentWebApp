@@ -59,3 +59,6 @@ def user_login(request):
 		form = AuthenticationForm()
 		return render(request, "account/login.html",context={"form": form})
 
+
+def adminpanel(request):
+    return render(request,"main/admin.html",{"adminpanel":adminpanel})

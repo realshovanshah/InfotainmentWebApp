@@ -13,7 +13,7 @@
     	<blockquote class="blockquote">
         <h5 class="card-title">{{f.feedback_show.shows_Name}}</h5>
         <p class="card-text mb-0">{{f.feedback}}</p>
-        <footer class="blockquote-footer"><cite title="Source Title">{{f.feedback_owner.username}}</cite></footer>
+        <footer class="blockquote-footer"><cite title="Source Title">{{f.feedback_owner.id}}</cite></footer>
         </blockquote>        
             <a href="{% url 'feedback:delete' f.pk %}"><button  class="btn btn-outline-dark btn-sm">Delete</button></a>
     </div>

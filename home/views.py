@@ -5,12 +5,16 @@ from .forms import UploadShows
 from django.db.models import Q
 from .forms import UploadShows, RecommendationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+@login_required(login_url='account:login')
 def recommendation(request):
         return render(request=request,template_name="home/recommendation.html")
 
 #function for homepage and listing the shows.
+@login_required(login_url='account:login')
 def home(request):
     show = Show.objects.all()
     if request.GET:
@@ -20,6 +24,7 @@ def home(request):
 
  
 #function for uploading.
+@login_required(login_url='account:login')
 def upload(request):
     if request.method == 'POST':
        form = UploadShows(request.POST,request.FILES)
@@ -58,13 +63,13 @@ def get_data_queryset(query=None):
         queryset.append(show)
     return list(set(queryset))
 
-
+@login_required(login_url='account:login')
 def delete_show(request, pk):
     show = Show.objects.get(pk=pk)
     show.delete()
     return redirect('home:home')
 
-
+@login_required(login_url='account:login')
 def delete_fav(request, pk=None):
     fav = Favorite.objects.get(pk=pk)
     # show = get_object_or_404(Show, pk=pk)
@@ -73,7 +78,7 @@ def delete_fav(request, pk=None):
     fav.shows.save()
     return redirect('home:favorites')
 
-
+@login_required(login_url='account:login')
 def update(request, show_id):
     show_obj = Show.objects.get(pk=show_id)
     post = request.POST or None
@@ -90,7 +95,7 @@ def update(request, show_id):
     #if admin
     return render(request, 'home/update.html', context)
 
-
+@login_required(login_url='account:login')
 def add_favorite(request,pk=None):
     if request.method == 'POST':
         show = get_object_or_404(Show, pk=pk)
@@ -108,7 +113,7 @@ def add_favorite(request,pk=None):
         #     show.save()
     return render(request, 'home/favorites.html')
         
-
+@login_required(login_url='account:login')
 def favorites(request):
     # new_fav= Favorite.objects.filter(user_id=request.user.id)
     new_fav= Favorite.objects.all()

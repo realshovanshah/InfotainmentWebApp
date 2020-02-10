@@ -30,7 +30,7 @@ def feedback(request, pk):
             print(request.user.id)
             # print(shows_id)
 
-        return redirect('main:home')
+        return redirect('feedback:details')
 
     
     form = FeedbackForm()
