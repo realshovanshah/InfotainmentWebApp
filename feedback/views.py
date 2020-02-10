@@ -16,6 +16,7 @@ def show_feedback(request):
 
 
 def feedback(request, pk):
+    show=Show.objects.get(pk=pk)
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         show=Show.objects.get(pk=pk)
@@ -33,7 +34,7 @@ def feedback(request, pk):
 
     
     form = FeedbackForm()
-    return render(request, 'feedback/feedback.html', {'form':form})
+    return render(request, 'feedback/feedback.html', {'form':form, 'show':show})
 
 
 def delete_feedback(request, pk):
