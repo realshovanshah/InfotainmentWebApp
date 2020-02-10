@@ -9,7 +9,7 @@ from home.models import Show
 
 class FeedbackTest(TestCase):
 
-		def setUp(self):
+	def setUp(self):
 		u = User.objects.create(user_name="lol", user_email="lol@gmail.com")
 		# Feedback.objects.create(feedback_owner=user, feedback_show="give feedback" )
 		s = Show.objects.create(shows_Name="coollol")
@@ -22,3 +22,4 @@ class FeedbackTest(TestCase):
 		feedback = Feedback.objects.get(feedback="lala")
 		self.assertEqual(user.user_name,"lol")
 		self.assertEqual(feedback.feedback, "lala")
+
