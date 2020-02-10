@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+ 
 {%block title%}<title>Favorites</title>{%endblock%}
 
 
@@ -11,28 +11,29 @@
         <div class="col-sm-3">
             <div class="card bg-light ">
                 <div class="inner">
-                <img src="{{ f.body.shows_Image.url }}" class="card-img-top" alt="...">
+                <img src="{{ f.shows.shows_Image.url }}" class="card-img-top" alt="...">
                 </div>
-                <div class="card-body pb-0">
-                    <h4 class="card-title">{{f.body.shows_Name}}</h4></a>
-                    <h6 class="card-subtitle mb-2 text-muted">{{f.body.shows_Type}}</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">{{f.body.shows_Genre}}</h6>
-                    <p class="card-text ">{{f.body.shows_Description}}</p>
+                <div class="card-body pb-0 mb-2">
+                    <h4 class="card-title">{{f.shows.shows_Name}}</h4></a>
+                    <h6 class="card-subtitle mb-2 text-muted">{{f.shows.shows_Type}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{f.shows.shows_Genre}}</h6>
+                    <p class="card-text ">{{f.shows.shows_Description}}</p>
                     <div class="mb-3">
-                        <a href="{{f.body.shows_Image.url}}" class="card-link">Download</a>
-                        <a href="/feedback" class="card-link ">Give Feedback</a>
+                        <a href="{{f.shows.shows_Image.url}}" class="card-link">Download</a>
+                        <a href="/feedback/{{f.shows.shows_id}}" class="card-link ">Give Feedback</a>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            <form method="POST" action="{% url 'home:delete_show' f.body.pk  %}">
+                        <div class="col mb-2">
+                            <form method="POST" action="{% url 'home:delete_fav' f.pk  %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
                             </form>
                         </div>
                         <div class="col">
-                            <a href="{% url 'home:update' f.body.pk %}"><button class="btn btn-outline-dark btn-sm">Update</button></a>
+                            <a href="{% url 'home:update' f.shows.pk %}"><button class="btn btn-outline-dark btn-sm">Update</button></a>
                         </div>
                     </div>
+                    <a href="/details" class="card-link">Reviews</a>
                 </div>
             </div>
         </div>

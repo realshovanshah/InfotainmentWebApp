@@ -1,13 +1,11 @@
 {% extends "base.html" %}
-
 {%block title%}<title>Home</title>{%endblock%}
-
 {% block content %}
 <br>
 <div class="container-fluid">
     <div class="row">
         {% for s in shows %}
-        <div class="col-sm-3">
+        <div class="col-sm-3 pb-2">
             <div class="card bg-light">
                 <div class="inner"><img src="{{ s.shows_Image.url }}" class="card-img-top" alt="..."></div>
                 <div class="card-body pb-0">
@@ -16,8 +14,14 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{s.shows_Genre}}</h6>
                     <p class="card-text">{{s.shows_Description}}</p>
                     <div class="mb-3">
-                        <a href="{{s.shows_Image.url}}" download class="card-link">Download</a>
-                        <a href="/feedback" class="card-link ">Give Feedback</a>
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{s.shows_Image.url}}" download class="card-link">Download</a>
+                            </div>
+                                <div class="col pl-0">
+                                <a href="/feedback/{{s.shows_id}}" class="card-link ">Give Feedback</a>
+                                </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -30,22 +34,33 @@
                             <a href="{% url 'home:update' s.pk %}"><button class="btn btn-outline-dark btn-sm">Update</button></a>
                         </div>
                     </div>
-                    {% if s in new_fav %}
-                    <form method="POST" action="{% url 'home:add_favorite' s.pk  %}" class="mb-1">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn btn-link pl-0">Added</button>
+                    {% if s.is_favorite %}
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn btn-link pl-0">Added</button>
+                        </div>
+                        <div class="col mt-1">
+                                <a href="/details" class="card-link">Reviews</a>
+                        </div>
+                    </div>
                 </div>
-                </form>
                 {% else %}
-                <form method="POST" action="{% url 'home:add_favorite' s.pk  %}" class="mb-1">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn btn-link pl-0">Favorite</button>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" action="{% url 'home:add_favorite' s.pk  %}" class="mb-1">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn btn-link pl-0">Favorite</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                                <a href="/details" class="card-link ">Reviews</a>
+                    </div>
+                </div>
             </div>
-            </form>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 </div>
 {% endblock %}

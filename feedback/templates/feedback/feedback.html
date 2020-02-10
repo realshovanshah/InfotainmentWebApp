@@ -4,13 +4,16 @@
 <title>Reviews</title>
 
 {% block content %}
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            <h5>Reviews for: <i>{{show.shows_Name}}</i></h5>
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                <!-- <input type="hidden" name="tenzin" value="{{shows_id}}"> -->
                 {{form|crispy}}
-             <input type="submit" class="btn btn-success btn-lg" value="POST">
+             <input type="submit" class="btn btn-success btn-sm" value="POST">
             </form>
         </div>
     </div>
