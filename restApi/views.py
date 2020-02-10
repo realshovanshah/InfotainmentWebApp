@@ -64,5 +64,5 @@ def api_pagination(request, PAGENO, SIZE):
     if request.method == "GET":
         skip = SIZE * (PAGENO -1)
         show = Show.objects.all() [skip:(PAGENO * SIZE)]
-        dictionary_type = {"show":list(show.values( "favorite", "feedback", "shows_Description", "shows_Genre", "shows_Image", "shows_Name", "shows_Type", "shows_id"))}
+        dictionary_type = {"show":list(show.values("shows_Name", "shows_Description", "shows_Genre", "shows_Image", "shows_Name", "shows_Type", "shows_id"))}
     return JsonResponse(dictionary_type)
