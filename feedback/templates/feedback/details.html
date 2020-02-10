@@ -13,12 +13,9 @@
         <p class="card-text mb-0">{{f.feedback}}</p>
         <small class="card-text">- {{f.feedback_owner.username}}</small>        
     </div>
+            <a href="{% url 'feedback:delete' f.pk %}"><button  class="btn btn-outline-dark btn-sm">Delete</button></a>
     {%endfor%}
 </div>
 {% endblock %}
 
 <!-- todo: feedback for diff shows, *permissions, feedback delete, url rest, rating, javascript/alert, fav ma user, fav added  -->
-<!-- <form method="POST" action=" url 'feedback:delete_feedback' f.pk  " class="mb-1">
-             csrf_token 
-            <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
-        </form> -->

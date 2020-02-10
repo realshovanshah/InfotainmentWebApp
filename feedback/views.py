@@ -14,10 +14,11 @@ def show_feedback(request):
     return render(request, "feedback/details.html", context={'feedback':feedback})
 
 
-def feedback(request):
+
+def feedback(request, pk):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
-        show=Show.objects.get(pk=request.user.id)
+        show=Show.objects.get(pk=pk)
         print(show)
         print(request.user.id)
         if form.is_valid():
@@ -35,7 +36,7 @@ def feedback(request):
     return render(request, 'feedback/feedback.html', {'form':form})
 
 
-def delete_feedback(request, pk=None):
+def delete_feedback(request, pk):
     feedback = Feedback.objects.get(pk=pk)
     feedback.delete()
-    return redirect('feedback:feedback')
+    return redirect('/details')
