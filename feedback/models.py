@@ -9,11 +9,11 @@ class Feedback(models.Model):
     feedback_show = models.ForeignKey(Show, on_delete=models.CASCADE, default=0)
     feedback = models.TextField()
 
-    def save_comment(self):
-        self.save()
+    # def save_comment(self):
+    #     self.save()
 
-    def delete_comment(self):
-        self.delete()
+    # def delete_comment(self):
+    #     self.delete()
    
     def __str__(self):
         return str(self.feedback)
