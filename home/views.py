@@ -67,7 +67,10 @@ def delete_show(request, pk):
 
 def delete_fav(request, pk=None):
     fav = Favorite.objects.get(pk=pk)
+    # show = get_object_or_404(Show, pk=pk)
     fav.delete()
+    fav.shows.is_favorite= False
+    fav.shows.save()
     return redirect('home:favorites')
 
 

@@ -9,11 +9,14 @@
     <h5 class="card-header">Reviews</h5>
     {% for f in feedback %}
     <div class="card-body">
+    <hr>
+    	<blockquote class="blockquote">
         <h5 class="card-title">{{f.feedback_show.shows_Name}}</h5>
         <p class="card-text mb-0">{{f.feedback}}</p>
-        <small class="card-text">- {{f.feedback_owner.username}}</small>        
-    </div>
+        <footer class="blockquote-footer"><cite title="Source Title">{{f.feedback_owner.username}}</cite></footer>
+        </blockquote>        
             <a href="{% url 'feedback:delete' f.pk %}"><button  class="btn btn-outline-dark btn-sm">Delete</button></a>
+    </div>
     {%endfor%}
 </div>
 {% endblock %}

@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         {% for s in shows %}
-        <div class="col-sm-3">
+        <div class="col-sm-3 pb-2">
             <div class="card bg-light">
                 <div class="inner"><img src="{{ s.shows_Image.url }}" class="card-img-top" alt="..."></div>
                 <div class="card-body pb-0">
@@ -39,8 +39,8 @@
                         <div class="col">
                             <button type="submit" class="btn btn btn-link pl-0">Added</button>
                         </div>
-                        <div class="col">
-                                <a href="/details" class="card-link ">Reviews</a>
+                        <div class="col mt-1">
+                                <a href="/details" class="card-link">Reviews</a>
                         </div>
                     </div>
                 </div>
