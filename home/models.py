@@ -1,9 +1,7 @@
 from django.db import models
 from main.models import User
 from model_utils import Choices
-# from .models import S
 
-# Create your models here
 
 #class for all movies and series in our application and their description.
 class Show(models.Model):
@@ -13,20 +11,16 @@ class Show(models.Model):
 	type_choices = Choices('TV Show','Movie')
 	shows_Type = models.CharField(choices=type_choices, max_length=20)
 	genre_choices = Choices('Sci-Fi','Drama', 'Romance', 'Comedy', 'Fantasy', 'Thriller')
-	shows_Genre = models.CharField(choices=genre_choices, max_length=20) #choices = (('Movie'), ('Series'))
+	shows_Genre = models.CharField(choices=genre_choices, max_length=20)
 	shows_Image = models.FileField(upload_to="shows/")
 	is_favorite=models.BooleanField(default=False,null=True)
-	#feedback= models.ForeignKey(Feedback, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.shows_Name
 
 
 class Favorite(models.Model):
-	# fav_id = 	models.AutoField(primary_key = True)
-	# user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-	shows = models.OneToOneField(Show, on_delete=models.CASCADE, null=True) #protect
-	# fav_status= models.BooleanField(null=True)
-	# body = models.TextField()
+	shows = models.OneToOneField(Show, on_delete=models.CASCADE, null=True)
+
 	def __str__(self):
 		return self.id
 
@@ -36,11 +30,3 @@ class Recommendation(models.Model):
 
 	def __str__(self):
 		return self.r_Name	
-#genre for all the movies and series
-# class Genre(models.Model):
-# 	genre_id = models.AutoField(primary_key=True)
-# 	genre_name = models.CharField(max_length=40) 
-# 	shows= models.ForeignKey(Show, on_delete=models.CASCADE)
-
-# 	def __str__(self):
-# 		return self.genre_name

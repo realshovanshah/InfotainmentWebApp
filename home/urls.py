@@ -6,7 +6,6 @@ from . import views
  
 app_name= "home"
 urlpatterns = [
-    # path('', views.home, name = "home"),
     path('home/', views.home, name = "home"),
     path('upload/',views.upload,name = "upload"),
     path("home/<int:pk>/", views.delete_show, name="delete_show"), #slug to delete specified no.
@@ -15,5 +14,4 @@ urlpatterns = [
     path('favorites', views.favorites, name="favorites"),
     path('recommendation/', views.recommendationDetail, name="recommendation"),
     path('add_favorite/<int:pk>/', views.add_favorite, name="add_favorite"),
-    # re_path('', index),
 ]	

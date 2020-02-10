@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-# Create your tests here.
 
+
+#tescase to see if the user is valid or not
 class AccountTest(TestCase):
 	def setUp(self):
 		User.objects.create_user(username="account", password="user")

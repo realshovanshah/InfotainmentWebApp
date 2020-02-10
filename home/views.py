@@ -29,7 +29,7 @@ def upload(request):
     form = UploadShows()
     return render (request,'home/upload.html',{'form':form})
 
-
+#recommends movie to the user
 def recommendationDetail(request):
     if request.method == 'POST':
        rform = RecommendationForm(request.POST)
@@ -38,12 +38,7 @@ def recommendationDetail(request):
            return redirect('home:home')
     rform = RecommendationForm()
     return render (request,'home/recommendation.html',{'rform':rform})
-# def show_list(request):
-#     show = Show.objects.all()
-#     if request.GET:
-#         query = request.GET['q']
-#         show = get_data_queryset(str(query))
-#     return render(request, "home/home.html", {"shows": show})
+
 
 
 #funtion for searching specific movies or series.
@@ -58,22 +53,21 @@ def get_data_queryset(query=None):
         queryset.append(show)
     return list(set(queryset))
 
-
+#deletes specific show from the app
 def delete_show(request, pk):
     show = Show.objects.get(pk=pk)
     show.delete()
     return redirect('home:home')
 
-
+#removes from favourites
 def delete_fav(request, pk=None):
     fav = Favorite.objects.get(pk=pk)
-    # show = get_object_or_404(Show, pk=pk)
     fav.delete()
     fav.shows.is_favorite= False
     fav.shows.save()
     return redirect('home:favorites')
 
-
+#updates shows in the app
 def update(request, show_id):
     show_obj = Show.objects.get(pk=show_id)
     post = request.POST or None
@@ -87,29 +81,22 @@ def update(request, show_id):
     context = {
         'show_form': show_form,
     }
-    #if admin
     return render(request, 'home/update.html', context)
 
-
+#adding shows into favourites
 def add_favorite(request,pk=None):
     if request.method == 'POST':
         show = get_object_or_404(Show, pk=pk)
         show.is_favorite= True
         show.save()
-        # f=Favorite(user_id=request.user.id)
         Favorite.objects.create(shows_id=show.shows_id)
-        # f.shows_id=pk
-        # f.fav_status=True
-        # f.save()
+        
         messages.success(request, 'Successfully Favorited!!!.')
         return redirect('home:home')
-        # else:
-        #     show.is_favorite = False
-        #     show.save()
+
     return render(request, 'home/favorites.html')
         
-
+#shows all favourites
 def favorites(request):
-    # new_fav= Favorite.objects.filter(user_id=request.user.id)
     new_fav= Favorite.objects.all()
     return render(request, 'home/favorites.html', {"new_fav":new_fav})

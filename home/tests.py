@@ -1,9 +1,7 @@
 from django.test import TestCase
 from home.models import Show, Favorite, Recommendation
-# from datetime import datetime
 
-# Create your tests here.
-
+#test to check Shows
 class ShowTest(TestCase):
 	def setUp(self):
 		Show.objects.create(shows_Name="office", shows_Description="comedy")
@@ -15,6 +13,8 @@ class ShowTest(TestCase):
 		self.assertEqual(e1.shows_Name, "office")
 		self.assertEqual(e2.shows_Name, "friends")
 
+
+#Testing of Recommendation
 class RecommendationTest(TestCase):
 	def setUp(self):
 		Recommendation.objects.create(Name = "win")

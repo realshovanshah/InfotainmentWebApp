@@ -5,14 +5,14 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-
+#Getting datas stored in the app
 def api_data(request):
      if request.method == "GET":
         show = Show.objects.all() 
         dict_type = {"shows": list(show.values("shows_id","shows_Name", "shows_Description"))}
         return JsonResponse(dict_type)
 
-   
+#Getting a specific data with primary key
 def api_get_data(request, pk):
     if request.method == "GET":
         try:
@@ -22,7 +22,7 @@ def api_get_data(request, pk):
         except:
             return JsonResponse({"Not Found":"Nothing found of that ID"})
 
-#updating data
+#Updating and deleting existing data using primary key
 @csrf_exempt
 def api_update_data(request, pk):
     show = Show.objects.get(pk=pk)
@@ -38,7 +38,7 @@ def api_update_data(request, pk):
         show.delete()
         return JsonResponse({"Deleted":"Successfully Deleted!!"})
 
-#for adding data
+#Adding new data into the app
 @csrf_exempt
 def api_add_data(request):
     if request.method == "POST":
@@ -59,7 +59,7 @@ def api_add_data(request):
             return JsonResponse({"Error":"Show is unable to be added"})
 
 
-#api pagination
+#Pagination of the api when there is too much data.
 def api_pagination(request, PAGENO, SIZE):
     if request.method == "GET":
         skip = SIZE * (PAGENO -1)
